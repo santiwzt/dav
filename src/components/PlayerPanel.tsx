@@ -4,6 +4,7 @@ import { getItemById } from '../data/items'
 import { BOARD_SIZE } from '../data/boardTiles'
 import Dice from './Dice'
 import { getCharacterById } from '../data/characters'
+import CharacterPortrait from './CharacterPortrait'
 
 export default function PlayerPanel() {
   const { state } = useGame()
@@ -28,7 +29,10 @@ export default function PlayerPanel() {
               <div className="name">{player.name}</div>
               {getCharacterById(player.characterId) && (
                 <div className="pos">
-                  {getCharacterById(player.characterId)?.emoji} {getCharacterById(player.characterId)?.name}
+                  <span className="mini-portrait">
+                    <CharacterPortrait id={player.characterId} />
+                  </span>
+                  {getCharacterById(player.characterId)?.name}
                 </div>
               )}
               <div className="pos">

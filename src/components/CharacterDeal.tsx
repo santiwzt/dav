@@ -3,6 +3,7 @@ import { useGame } from '../context/GameContext'
 import { getCharacterById } from '../data/characters'
 import { getAvatar, getColor } from '../data/players'
 import * as sound from '../utils/sound'
+import CharacterPortrait from './CharacterPortrait'
 
 // Reparto inicial: a cada jugador le toca una tarjeta de personaje al azar (sin repetir).
 // Es solo ambientacion: no cambia ninguna regla ni da ventajas.
@@ -50,8 +51,8 @@ export default function CharacterDeal() {
                     <span>El Reino en Juego</span>
                   </span>
                   <span className="deal-face deal-front" style={{ borderColor: character.color }}>
-                    <span className="deal-avatar" style={{ background: character.color }}>
-                      {character.emoji}
+                    <span className="deal-portrait" style={{ borderColor: character.color }}>
+                      <CharacterPortrait id={character.id} />
                     </span>
                     <strong className="deal-name">{character.name}</strong>
                     <span className="deal-role">{character.role}</span>

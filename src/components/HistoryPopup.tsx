@@ -1,5 +1,6 @@
 import { useGame } from '../context/GameContext'
 import { getCharacterById } from '../data/characters'
+import CharacterPortrait from './CharacterPortrait'
 
 export default function HistoryPopup() {
   const { state, closeHistoryModal } = useGame()
@@ -33,7 +34,9 @@ export default function HistoryPopup() {
                       <span className="card-emoji">❔</span>
                     </div>
                     <div className="flip-card-face" style={{ background: c.color, transform: 'rotateY(0deg)' }}>
-                      <span className="card-emoji">{c.emoji}</span>
+                      <span className="flip-portrait">
+                        <CharacterPortrait id={c.id} />
+                      </span>
                       <span className="card-name">{c.name}</span>
                     </div>
                   </div>

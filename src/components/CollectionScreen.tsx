@@ -3,6 +3,7 @@ import { CHARACTERS } from '../data/characters'
 import { ACHIEVEMENTS } from '../data/achievements'
 import { useCollection } from '../context/CollectionContext'
 import CharacterModal from './CharacterModal'
+import CharacterPortrait from './CharacterPortrait'
 import type { CharacterDef } from '../types'
 
 interface Props {
@@ -46,7 +47,7 @@ export default function CollectionScreen({ onBack }: Props) {
                   onClick={() => unlocked && setSelected(c)}
                 >
                   <div className="card-avatar" style={{ background: unlocked ? c.color : undefined }}>
-                    {unlocked ? c.emoji : '❔'}
+                    {unlocked ? <CharacterPortrait id={c.id} /> : '❔'}
                   </div>
                   <div className="card-title">{unlocked ? c.name : '???'}</div>
                   <div className="card-role">{unlocked ? c.role : 'Bloqueado'}</div>

@@ -868,8 +868,8 @@ svg {
   border-color: var(--accent-yellow);
 }
 .character-card .card-avatar {
-  width: 64px;
-  height: 64px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
   margin: 0 auto 0.5rem;
   display: flex;
@@ -877,6 +877,9 @@ svg {
   justify-content: center;
   font-size: 1.9rem;
   color: white;
+  overflow: hidden;
+  border: 3px solid #fff;
+  box-shadow: var(--shadow-sm);
 }
 .character-card.locked .card-avatar {
   background: #c7cedd !important;
@@ -945,14 +948,12 @@ svg {
 
 /* ---------- Personaje modal ---------- */
 .character-modal-avatar {
-  width: 88px;
-  height: 88px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.6rem;
-  color: white;
+  overflow: hidden;
+  border: 5px solid var(--chapter-1);
+  box-shadow: var(--shadow-md);
   margin: 0 auto 0.8rem;
 }
 .character-quote {
@@ -1269,7 +1270,7 @@ svg {
 }
 .deal-card {
   width: 250px;
-  height: 360px;
+  height: 400px;
   perspective: 900px;
   padding: 0;
 }
@@ -1353,4 +1354,40 @@ svg {
   gap: 0.8rem;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+/* ---------- Retratos de personajes ---------- */
+.portrait {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+.deal-portrait {
+  display: block;
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--chapter-1);
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+.flip-portrait {
+  display: block;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #fff;
+}
+.mini-portrait {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  vertical-align: middle;
+  margin-right: 4px;
 }
