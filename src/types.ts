@@ -125,6 +125,7 @@ export interface PlayerSetup {
 
 export interface PlayerState extends PlayerSetup {
   id: number
+  characterId: string
   position: number // 1..40+
   items: ItemId[]
   correctAnswers: number

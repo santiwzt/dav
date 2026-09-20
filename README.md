@@ -54,7 +54,8 @@ Ninguna mecánica es una decisión narrativa: todo el juego es azar o gestión a
 
 - Menú principal con Jugar / Reglas / Contenido / Historia / Personajes / Créditos y control de sonido.
 - Configuración de partida: 2 a 4 jugadores, cada uno con nombre, avatar (corona, león, shofar, pergamino, escudo, lámpara, estrella, palmera) y color propio.
-- Tablero ilustrado con fondos SVG originales por zona (tienda y palmeras, columnas, templo y balanza), dado animado con pips, fichas con animación de salto, panel lateral con barra de progreso por jugador.
+- Tablero de proporcion fija 5:3 (ocupa toda la pantalla): 40 casilleros circulares sobre un camino sinuoso por capitulo, escenografia SVG original (tienda y palmeras, columnas, templo y balanza), banderas de capitulo, dado con pips, fichas que saltan casillero por casillero y barra de progreso por jugador.
+- Reparto de tarjetas de personaje al empezar: a cada jugador le toca un personaje al azar (sin repetir), con animacion de carta. Es solo ambientacion, no cambia reglas.
 - Animación de "flip" 3D al desbloquear un personaje nuevo + notificación en pantalla.
 - Pantalla de victoria con estadísticas (turnos, aciertos, racha, eventos vistos) y confeti.
 - Menú de pausa (continuar / salir al menú) y persistencia de configuración y sonido en `localStorage`.

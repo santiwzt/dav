@@ -10,6 +10,7 @@ import KingdomEventPopup from './KingdomEventPopup'
 import VictoryScreen from './VictoryScreen'
 import PauseMenu from './PauseMenu'
 import ToastContainer from './ToastContainer'
+import CharacterDeal from './CharacterDeal'
 import { getAvatar } from '../data/players'
 
 interface Props {
@@ -26,6 +27,8 @@ export default function GameScreenView({ setups, onExitToMenu }: Props) {
   }, [])
 
   if (state.players.length === 0) return null
+
+  if (state.dealing) return <CharacterDeal />
 
   const currentPlayer = state.players[state.currentPlayerIndex]
 

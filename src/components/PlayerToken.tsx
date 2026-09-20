@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { PlayerState } from '../types'
-import { getTileGridPosition, TOKEN_OFFSETS } from '../utils/boardLayout'
+import { getTileCenter, TOKEN_OFFSETS } from '../utils/boardLayout'
 import { getAvatar, getColor } from '../data/players'
 import { BOARD_SIZE } from '../data/boardTiles'
 
@@ -10,40 +10,47 @@ interface Props {
   isCurrent?: boolean
 }
 
+const STEP_INTERVAL_MS = 190
+
 export default function PlayerToken({ player, isCurrent }: Props) {
-  const clampedPosition = Math.min(player.position, BOARD_SIZE)
-  const { row, col } = getTileGridPosition(clampedPosition)
+  const target = Math.min(player.position, BOARD_SIZE)
+  // Posicion "visible": la ficha recorre casillero por casillero hasta llegar al destino.
+  const [shown, setShown] = useState(target)
+  const shownRef = useRef(target)
+
+  useEffect(() => {
+    if (shownRef.current === target) return
+    const id = setInterval(() => {
+      const current = shownRef.current
+      if (current === target) {
+        clearInterval(id)
+        return
+      }
+      const next = current + Math.sign(target - current)
+      shownRef.current = next
+      setShown(next)
+      if (next === target) clearInterval(id)
+    }, STEP_INTERVAL_MS)
+    return () => clearInterval(id)
+  }, [target])
+
+  const center = getTileCenter(shown)
   const offset = TOKEN_OFFSETS[player.id % TOKEN_OFFSETS.length]
   const avatar = getAvatar(player.avatar)
   const color = getColor(player.color)
 
-  const [hopping, setHopping] = useState(false)
-  const prevPos = useRef(player.position)
-
-  useEffect(() => {
-    if (prevPos.current !== player.position) {
-      setHopping(true)
-      const t = setTimeout(() => setHopping(false), 520)
-      prevPos.current = player.position
-      return () => clearTimeout(t)
-    }
-  }, [player.position])
-
-  const leftPct = ((col + 0.5) / 8) * 100
-  const topPct = ((row + 0.5) / 5) * 100
-
   return (
     <div
-      className={`player-token ${hopping ? 'hopping' : ''} ${isCurrent ? 'current-turn' : ''}`}
+      className={`token ${isCurrent ? 'current-turn' : ''}`}
       style={{
-        left: `calc(${leftPct}% + ${offset.x}px)`,
-        top: `calc(${topPct}% + ${offset.y}px)`,
-        transform: 'translate(-50%, -50%)',
-        background: color.hex,
+        left: `calc(${center.x}% + ${offset.x}cqw)`,
+        top: `calc(${center.y}% + ${offset.y}cqw)`,
       }}
       title={player.name}
     >
-      {avatar.emoji}
+      <span className="token-body" key={shown} style={{ background: color.hex }}>
+        {avatar.emoji}
+      </span>
     </div>
   )
 }

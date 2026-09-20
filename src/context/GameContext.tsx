@@ -55,6 +55,7 @@ export interface GameState {
   winnerId: number | null
   gameStats: GameStats | null
   isPaused: boolean
+  dealing: boolean
   toasts: ToastItem[]
 }
 
@@ -70,6 +71,7 @@ interface GameContextValue {
   pauseGame: () => void
   resumeGame: () => void
   restartSameSetup: () => void
+  finishDealing: () => void
 }
 
 const GameContext = createContext<GameContextValue | null>(null)
@@ -78,10 +80,22 @@ function makeId(): string {
   return Math.random().toString(36).slice(2, 10)
 }
 
+// Reparto de tarjetas de personaje: al azar y sin repetir (la entrada conjunta de las dos mujeres no se reparte).
+function dealCharacterIds(count: number): string[] {
+  const pool = CHARACTERS.filter((c) => c.id !== 'dos-mujeres').map((c) => c.id)
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[pool[i], pool[j]] = [pool[j], pool[i]]
+  }
+  return pool.slice(0, count)
+}
+
 function createPlayers(setups: PlayerSetup[]): PlayerState[] {
+  const dealt = dealCharacterIds(setups.length)
   return setups.map((s, i) => ({
     ...s,
     id: i,
+    characterId: dealt[i],
     position: 1,
     items: [],
     correctAnswers: 0,
@@ -114,6 +128,7 @@ function emptyState(): GameState {
     winnerId: null,
     gameStats: null,
     isPaused: false,
+    dealing: false,
     toasts: [],
   }
 }
@@ -474,12 +489,16 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
 
   function startGame(setups: PlayerSetup[]) {
     lastSetupRef.current = setups
-    setState({ ...emptyState(), players: createPlayers(setups) })
+    setState({ ...emptyState(), players: createPlayers(setups), dealing: true })
   }
 
   function restartSameSetup() {
     if (lastSetupRef.current.length === 0) return
-    setState({ ...emptyState(), players: createPlayers(lastSetupRef.current) })
+    setState({ ...emptyState(), players: createPlayers(lastSetupRef.current), dealing: true })
+  }
+
+  function finishDealing() {
+    setState((prev) => ({ ...prev, dealing: false }))
   }
 
   function pauseGame() {
@@ -569,6 +588,7 @@ export function GameProvider({ children }: { children: React.ReactNode }) {
     pauseGame,
     resumeGame,
     restartSameSetup,
+    finishDealing,
   }
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>

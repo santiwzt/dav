@@ -3,6 +3,7 @@ import { getAvatar, getColor } from '../data/players'
 import { getItemById } from '../data/items'
 import { BOARD_SIZE } from '../data/boardTiles'
 import Dice from './Dice'
+import { getCharacterById } from '../data/characters'
 
 export default function PlayerPanel() {
   const { state } = useGame()
@@ -25,6 +26,11 @@ export default function PlayerPanel() {
             </div>
             <div className="player-card-info">
               <div className="name">{player.name}</div>
+              {getCharacterById(player.characterId) && (
+                <div className="pos">
+                  {getCharacterById(player.characterId)?.emoji} {getCharacterById(player.characterId)?.name}
+                </div>
+              )}
               <div className="pos">
                 Casillero {Math.min(player.position, BOARD_SIZE)} / {BOARD_SIZE} · ✅ {player.correctAnswers} · ❌{' '}
                 {player.wrongAnswers}
@@ -54,6 +60,15 @@ export default function PlayerPanel() {
           </div>
         )
       })}
+      <div className="board-legend">
+        <h4>Casilleros</h4>
+        <span>❓ Trivia</span>
+        <span>📖 Historia</span>
+        <span>⭐ Bonus +2</span>
+        <span>⚠️ Retroceso -2</span>
+        <span>🎁 Objeto</span>
+        <span>📯 Evento</span>
+      </div>
     </div>
   )
 }
