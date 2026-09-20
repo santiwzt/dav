@@ -1,6 +1,5 @@
 import type { GameScreen } from '../types'
 import SoundToggle from './SoundToggle'
-import CharacterPortrait from './CharacterPortrait'
 import { useCollection } from '../context/CollectionContext'
 import { CHARACTERS } from '../data/characters'
 
@@ -9,8 +8,6 @@ interface Props {
   soundOn: boolean
   onToggleSound: () => void
 }
-
-const CAST = ['david', 'shlomo', 'natan', 'batsheba', 'benaia', 'tzadok']
 
 const BUILDINGS: [number, number, number, string][] = [
   [180, 70, 90, '#e9dcc4'],
@@ -155,14 +152,6 @@ export default function MainMenu({ onNavigate, soundOn, onToggleSound }: Props) 
           ))}
         </div>
 
-        <div className="home-cast" aria-label="Personajes del juego">
-          {CAST.map((id) => (
-            <span className="home-cast-item" key={id}>
-              <CharacterPortrait id={id} />
-            </span>
-          ))}
-        </div>
-        <p className="home-footer">Proyecto de Cultura Judía · 4.º año</p>
       </main>
     </div>
   )
