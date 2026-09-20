@@ -174,13 +174,6 @@ export default function GameSetup({ onBack, onStart }: Props) {
         </section>
 
         <div className="setup-bar">
-          <div className="setup-summary" aria-label="Jugadores">
-            {players.map((p, i) => (
-              <span className="setup-chip" key={i} style={{ background: getColor(p.color).hex }}>
-                {getAvatar(p.avatar).emoji} {p.name.trim() || '—'}
-              </span>
-            ))}
-          </div>
           <button className="home-cta setup-start" onClick={handleStart} disabled={!allNamed}>
             <span className="home-cta-icon">🎲</span> ¡Empezar partida!
           </button>
