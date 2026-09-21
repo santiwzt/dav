@@ -76,4 +76,4 @@ src/
 
 ## Créditos
 
-Proyecto de Cultura Judía — 4.º año.
+Proyecto de Cultura Judía — 4.º año. Hecho por Santiago W, Matias O y Vicente V.
