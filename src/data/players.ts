@@ -12,10 +12,10 @@ export const AVATARS: AvatarDef[] = [
 ]
 
 export const PLAYER_COLORS: PlayerColorDef[] = [
-  { id: 'azul', label: 'Azul', hex: '#3dabdb', soft: '#d9f0fa' },
-  { id: 'naranja', label: 'Naranja', hex: '#f2a93b', soft: '#fdecd2' },
-  { id: 'violeta', label: 'Violeta', hex: '#8a5fbf', soft: '#ece1f7' },
-  { id: 'verde', label: 'Verde', hex: '#45b787', soft: '#d9f5e9' },
+  { id: 'azul', label: 'Azul', hex: '#2c5187', soft: '#dde6f2' },
+  { id: 'naranja', label: 'Bronce', hex: '#a9772f', soft: '#f0e4cc' },
+  { id: 'violeta', label: 'Violeta', hex: '#5f4a86', soft: '#e6e0ef' },
+  { id: 'verde', label: 'Verde', hex: '#2f7a5c', soft: '#dcece4' },
 ]
 
 export function getAvatar(id: string): AvatarDef {
