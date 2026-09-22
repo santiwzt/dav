@@ -27,9 +27,9 @@ const TILE_LABEL: Record<string, string> = {
 }
 
 const CHAPTER_FLAGS = [
-  { position: 1, chapter: 1, text: 'Cap. 1 · La sucesión al trono' },
-  { position: 15, chapter: 2, text: 'Cap. 2 · El reino se consolida' },
-  { position: 28, chapter: 3, text: 'Cap. 3 · La sabiduría de Shlomó' },
+  { position: 1, chapter: 1, text: 'Capítulo 1', title: 'La sucesión al trono' },
+  { position: 15, chapter: 2, text: 'Capítulo 2', title: 'El reino se consolida' },
+  { position: 28, chapter: 3, text: 'Capítulo 3', title: 'La sabiduría de Shlomó' },
 ]
 
 export default function GameBoard() {
@@ -47,6 +47,7 @@ export default function GameBoard() {
               key={f.position}
               className={`chapter-flag ch-${f.chapter}`}
               style={{ left: `${c.x}%`, top: `${c.y}%` }}
+              title={f.title}
             >
               {f.text}
             </div>
