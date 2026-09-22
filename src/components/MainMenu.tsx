@@ -121,6 +121,22 @@ export default function MainMenu({ onNavigate, soundOn, onToggleSound }: Props) 
 
   return (
     <div className="home">
+      <div
+        style={{
+          position: 'fixed',
+          top: 4,
+          left: 4,
+          zIndex: 999,
+          background: '#000',
+          color: '#0f0',
+          fontFamily: 'monospace',
+          fontSize: 12,
+          padding: '2px 6px',
+          borderRadius: 4,
+        }}
+      >
+        {typeof window !== 'undefined' ? `${window.innerWidth}×${window.innerHeight} (DPR ${window.devicePixelRatio})` : ''}
+      </div>
       <HomeScenery />
       <div className="home-sound">
         <SoundToggle soundOn={soundOn} onToggle={onToggleSound} />
