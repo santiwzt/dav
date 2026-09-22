@@ -1498,9 +1498,9 @@ svg {
 .home-title {
   margin-top: 0.5rem;
   font-size: clamp(2.2rem, 6.2vw, 4rem);
-  line-height: 1.08;
+  line-height: 1.18;
   color: var(--ink);
-  text-shadow: 0 4px 0 #fff, 0 10px 24px rgba(31, 42, 68, 0.25);
+  text-shadow: 0 3px 10px rgba(31, 42, 68, 0.18);
   white-space: nowrap;
 }
 @media (max-width: 600px) {
@@ -1513,7 +1513,6 @@ svg {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 4px 0 #fff);
 }
 .home-sub {
   margin-top: 0.9rem;
@@ -1570,6 +1569,11 @@ svg {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 0.8rem;
+}
+@media (min-width: 720px) {
+  .home-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
 .home-card {
   background: rgba(255, 255, 255, 0.94);
