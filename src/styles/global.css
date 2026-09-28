@@ -1967,3 +1967,71 @@ svg {
   font-weight: 600;
   color: var(--ink-soft);
 }
+
+/* ---------- Banco de preguntas ---------- */
+.qbank {
+  margin-top: 2rem;
+}
+.qbank-title {
+  font-size: 1.4rem;
+  margin-bottom: 0.9rem;
+}
+.qbank-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 0.9rem;
+}
+.qbank-card {
+  background: var(--paper);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.2rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--line);
+}
+.qbank-meta {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--chapter-3);
+}
+.qbank-question {
+  margin: 0.35rem 0 0.7rem;
+  font-size: 1.02rem;
+  line-height: 1.35;
+}
+.qbank-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.qbank-options li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--cream);
+  font-size: 0.9rem;
+}
+.qbank-options li.correct {
+  background: var(--accent-green-soft);
+  font-weight: 700;
+}
+.qbank-letter {
+  font-weight: 800;
+  color: var(--ink-soft);
+  min-width: 1.1rem;
+}
+.qbank-tick {
+  margin-left: auto;
+  color: var(--accent-green);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+.qbank-explanation {
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
