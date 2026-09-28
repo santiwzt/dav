@@ -1,6 +1,9 @@
 import { useGame } from '../context/GameContext'
 import { getAvatar, getColor } from '../data/players'
 import Confetti from './Confetti'
+import { TRIVIA_QUESTIONS } from '../data/triviaQuestions'
+
+const LETTERS = ['A', 'B', 'C', 'D']
 
 interface Props {
   onRestart: () => void
@@ -55,6 +58,41 @@ export default function VictoryScreen({ onRestart, onExitToMenu }: Props) {
           <div className="stat-label">Mejor racha de aciertos</div>
         </div>
       </div>
+
+      {winner.triviaLog.length > 0 && (
+        <details className="victory-review">
+          <summary>📋 Ver las preguntas que le tocaron a {winner.name} ({winner.triviaLog.length})</summary>
+          <div className="victory-review-list">
+            {winner.triviaLog.map((entry, i) => {
+              const q = TRIVIA_QUESTIONS.find((x) => x.id === entry.questionId)
+              if (!q) return null
+              return (
+                <article className="qbank-card" key={`${entry.questionId}-${i}`}>
+                  <div className="qbank-meta">
+                    Capítulo {q.chapter} · Pregunta {i + 1} · {entry.correct ? '✅ Acertó' : '❌ Falló'}
+                  </div>
+                  <h4 className="qbank-question">{q.question}</h4>
+                  <ul className="qbank-options">
+                    {q.options.map((opt, idx) => {
+                      const isCorrect = idx === q.correctIndex
+                      const isWrongPick = idx === entry.selectedIndex && !isCorrect
+                      return (
+                        <li key={idx} className={isCorrect ? 'correct' : isWrongPick ? 'wrong' : ''}>
+                          <span className="qbank-letter">{LETTERS[idx]}</span>
+                          <span>{opt}</span>
+                          {isCorrect && <span className="qbank-tick"> ✓ Correcta</span>}
+                          {isWrongPick && <span className="qbank-tick qbank-tick-wrong"> Tu respuesta</span>}
+                        </li>
+                      )
+                    })}
+                  </ul>
+                  <p className="qbank-explanation">{q.explanation}</p>
+                </article>
+              )
+            })}
+          </div>
+        </details>
+      )}
 
       <div className="menu-buttons" style={{ marginTop: '2rem' }}>
         <button className="btn btn-primary" onClick={onRestart}>

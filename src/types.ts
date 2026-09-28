@@ -133,6 +133,7 @@ export interface PlayerState extends PlayerSetup {
   triviaStreak: number
   maxTriviaStreak: number
   retreatsFromTrivia: number
+  triviaLog: { questionId: string; selectedIndex: number; correct: boolean }[]
   historyVisited: string[]
   turnsPlayed: number
 }

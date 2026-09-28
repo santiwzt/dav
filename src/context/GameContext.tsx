@@ -103,6 +103,7 @@ function createPlayers(setups: PlayerSetup[]): PlayerState[] {
     triviaStreak: 0,
     maxTriviaStreak: 0,
     retreatsFromTrivia: 0,
+    triviaLog: [],
     historyVisited: [],
     turnsPlayed: 0,
   }))
@@ -384,16 +385,18 @@ function computeAnswerTrivia(prev: GameState, selectedIndex: number, effects: Ef
   const idx = prev.currentPlayerIndex
   const players = prev.players.map((p, i) => {
     if (i !== idx) return p
+    const triviaLog = [...p.triviaLog, { questionId: question.id, selectedIndex, correct }]
     if (correct) {
       const streak = p.triviaStreak + 1
       return {
         ...p,
+        triviaLog,
         correctAnswers: p.correctAnswers + 1,
         triviaStreak: streak,
         maxTriviaStreak: Math.max(p.maxTriviaStreak, streak),
       }
     }
-    return { ...p, wrongAnswers: p.wrongAnswers + 1, triviaStreak: 0 }
+    return { ...p, triviaLog, wrongAnswers: p.wrongAnswers + 1, triviaStreak: 0 }
   })
 
   effects.sounds.push(() => (correct ? sound.playCorrect() : sound.playWrong()))
